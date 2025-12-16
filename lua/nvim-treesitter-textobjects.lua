@@ -1,5 +1,4 @@
 local configs = require "nvim-treesitter"
-local utils = require "nvim-treesitter.utils"
 local ts = require "nvim-treesitter.compat"
 
 local M = {}
@@ -67,7 +66,7 @@ function M.init()
     },
   }
   for _, m in ipairs { "select", "move", "repeatable_move", "swap", "lsp_interop" } do
-    utils.setup_commands("textobjects." .. m, require("nvim-treesitter.textobjects." .. m).commands)
+    configs.setup_commands("textobjects." .. m, require("nvim-treesitter.textobjects." .. m).commands)
   end
 end
 
