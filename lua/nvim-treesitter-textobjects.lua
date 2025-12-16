@@ -1,10 +1,9 @@
 local configs = require "nvim-treesitter"
-local ts = require "nvim-treesitter.compat"
 
 local M = {}
 
 M.has_textobjects = function(lang)
-  return ts.get_query_files(lang, "textobjects") ~= nil
+  return configs.get_query_files(lang, "textobjects") ~= nil
 end
 
 local function has_some_textobject_mapping(lang)
