@@ -2,7 +2,6 @@ local ts_utils = require "nvim-treesitter.ts_utils"
 local attach = require "nvim-treesitter.textobjects.attach"
 local shared = require "nvim-treesitter.textobjects.shared"
 local repeatable_move = require "nvim-treesitter.textobjects.repeatable_move"
-local queries = require "nvim-treesitter.query"
 local configs = require "nvim-treesitter"
 local parsers = require "nvim-treesitter.parsers"
 
@@ -75,7 +74,7 @@ local function move(opts)
     local best_start
     for _, query_string in ipairs(query_strings) do
       for _, start_ in ipairs(starts) do
-        local current_match = queries.find_best_match(bufnr, query_string, query_group, function(match)
+        local current_match = configs.find_best_match(bufnr, query_string, query_group, function(match)
           return filter_function(start_, match)
         end, function(match)
           return scoring_function(start_, match)

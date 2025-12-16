@@ -2,7 +2,6 @@ local api = vim.api
 
 local configs = require "nvim-treesitter"
 local parsers = require "nvim-treesitter.parsers"
-local queries = require "nvim-treesitter.query"
 local ts_utils = require "nvim-treesitter.ts_utils"
 
 local M = {}
@@ -100,8 +99,8 @@ function M.available_textobjects(lang, query_group)
   if not parsed_queries then
     return {}
   end
-  local found_textobjects = parsed_queries.captures or {}
-  for _, p in pairs(parsed_queries.info.patterns) do
+  local found_textobjects = parsed_configs.captures or {}
+  for _, p in pairs(parsed_configs.info.patterns) do
     for _, q in ipairs(p) do
       local query, arg1 = unpack(q)
       if query == "make-range!" and not vim.tbl_contains(found_textobjects, arg1) then
@@ -236,7 +235,7 @@ function M.textobject_at_point(query_string, query_group, pos, bufnr, opts)
     return
   end
 
-  local matches = queries.get_capture_matches_recursively(bufnr, query_string, query_group)
+  local matches = configs.get_capture_matches_recursively(bufnr, query_string, query_group)
   if string.match(query_string, "^@.*%.outer$") then
     local range, node = best_match_at_point(matches, row, col, opts)
     return bufnr, range, node
@@ -248,7 +247,7 @@ function M.textobject_at_point(query_string, query_group, pos, bufnr, opts)
       query_string_outer = query_string .. ".outer"
     end
 
-    local matches_outer = queries.get_capture_matches_recursively(bufnr, query_string_outer, query_group)
+    local matches_outer = configs.get_capture_matches_recursively(bufnr, query_string_outer, query_group)
     if #matches_outer == 0 then
       -- Outer query doesn't exist or doesn't match anything
       -- Return the best match from the entire buffer, just like the @*.outer case
@@ -330,7 +329,7 @@ function M.next_textobject(node, query_string, query_group, same_parent, overlap
     return -node_start
   end
 
-  local next_node = queries.find_best_match(bufnr, query_string, query_group, filter_function, scoring_function)
+  local next_node = configs.find_best_match(bufnr, query_string, query_group, filter_function, scoring_function)
 
   if next_node then
     return next_node.node, next_node.metadata
@@ -367,7 +366,7 @@ function M.previous_textobject(node, query_string, query_group, same_parent, ove
     return node_end
   end
 
-  local previous_node = queries.find_best_match(bufnr, query_string, query_group, filter_function, scoring_function)
+  local previous_node = configs.find_best_match(bufnr, query_string, query_group, filter_function, scoring_function)
 
   if previous_node then
     return previous_node.node, previous_node.metadata
