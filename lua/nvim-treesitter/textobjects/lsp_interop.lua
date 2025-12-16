@@ -1,6 +1,6 @@
 local attach = require "nvim-treesitter.textobjects.attach"
 local shared = require "nvim-treesitter.textobjects.shared"
-local configs = require "nvim-treesitter.configs"
+local configs = require "nvim-treesitter"
 
 local M = {}
 

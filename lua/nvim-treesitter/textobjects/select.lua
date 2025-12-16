@@ -1,5 +1,5 @@
 local api = vim.api
-local configs = require "nvim-treesitter.configs"
+local configs = require "nvim-treesitter"
 local parsers = require "nvim-treesitter.parsers"
 
 local shared = require "nvim-treesitter.textobjects.shared"

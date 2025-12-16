@@ -1,4 +1,4 @@
-local configs = require "nvim-treesitter.configs"
+local configs = require "nvim-treesitter"
 local utils = require "nvim-treesitter.utils"
 local ts = require "nvim-treesitter.compat"
 

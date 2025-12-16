@@ -3,7 +3,7 @@ local attach = require "nvim-treesitter.textobjects.attach"
 local shared = require "nvim-treesitter.textobjects.shared"
 local repeatable_move = require "nvim-treesitter.textobjects.repeatable_move"
 local queries = require "nvim-treesitter.query"
-local configs = require "nvim-treesitter.configs"
+local configs = require "nvim-treesitter"
 local parsers = require "nvim-treesitter.parsers"
 
 local M = {}

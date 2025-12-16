@@ -1,4 +1,4 @@
-local configs = require "nvim-treesitter.configs"
+local configs = require "nvim-treesitter"
 local M = {}
 
 local function make_dot_repeatable(fn)
